@@ -1,0 +1,146 @@
+{
+  "header": {
+    "home": "Accueil",
+    "templates": "Modèles",
+    "features": "Fonctionnalités",
+    "pricing": "Tarifs",
+    "about": "À propos",
+    "buildResume": "Créer un CV",
+    "signIn": "Se connecter",
+    "signOut": "Se déconnecter",
+    "account": "Compte"
+  },
+  "home": {
+    "title": "Créez Votre CV Parfait en Quelques Minutes",
+    "subtitle": "Modèles professionnels, suggestions alimentées par l'IA et personnalisation facile.",
+    "cta": "Créez Votre CV Maintenant",
+    "whyChoose": "Pourquoi Choisir Resume Architect ?",
+    "features": {
+      "easyToUse": {
+        "title": "Facile à Utiliser",
+        "description": "Interface intuitive qui vous guide à chaque étape du processus de création de CV."
+      },
+      "aiPowered": {
+        "title": "Alimenté par l'IA",
+        "description": "Utilisez l'intelligence artificielle pour optimiser le contenu et la structure de votre CV."
+      },
+      "professionalTemplates": {
+        "title": "Modèles Professionnels",
+        "description": "Choisissez parmi une variété de modèles de CV modernes et compatibles avec les ATS."
+      }
+    },
+    "readyToLand": "Prêt à Décrocher l'Emploi de Vos Rêves ?",
+    "standOut": "Créez un CV remarquable qui vous fera remarquer par les meilleurs employeurs.",
+    "startBuilding": "Commencez à Créer Votre CV"
+  },
+  "footer": {
+    "companyName": "Resume Architect",
+    "companyDescription": "Créez facilement des CV professionnels.",
+    "quickLinks": "Liens Rapides",
+    "legal": "Mentions Légales",
+    "termsOfService": "Conditions d'Utilisation",
+    "privacyPolicy": "Politique de Confidentialité",
+    "contactDeveloper": "Contacter le Développeur",
+    "connectOnLinkedIn": "Se connecter sur LinkedIn",
+    "allRightsReserved": "Tous droits réservés",
+    "languages": {
+      "english": "English",
+      "spanish": "Español",
+      "french": "Français"
+    }
+  },
+  "pricing": {
+    "title": "Tarification Simple pour Tous",
+    "free": "Gratuit",
+    "features": {
+      "oneResume": "Créez et modifiez un CV",
+      "allTemplates": "Accès à tous les modèles",
+      "pdfDownload": "Téléchargement en PDF",
+      "aiSuggestions": "Suggestions IA de base"
+    },
+    "cta": {
+      "signedIn": "Commencer à Créer",
+      "notSignedIn": "S'inscrire Gratuitement"
+    },
+    "startBuilding": "Commencez à créer votre CV professionnel dès aujourd'hui !"
+  },
+  "features": {
+    "title": "Fonctionnalités Puissantes pour Créer Votre CV Parfait",
+    "templates": {
+      "title": "Modèles Professionnels",
+      "description": "Choisissez parmi une large gamme de modèles conçus professionnellement et compatibles avec les ATS."
+    },
+    "aiSuggestions": {
+      "title": "Suggestions Alimentées par l'IA",
+      "description": "Obtenez des suggestions de contenu intelligentes pour optimiser votre CV pour l'emploi visé."
+    },
+    "customization": {
+      "title": "Personnalisation Facile",
+      "description": "Personnalisez votre CV avec notre interface intuitive de glisser-déposer."
+    },
+    "formats": {
+      "title": "Formats Multiples",
+      "description": "Téléchargez votre CV dans divers formats, y compris PDF, Word et texte brut."
+    },
+    "downloads": {
+      "title": "Téléchargements Illimités",
+      "description": "Créez et téléchargez autant de versions de votre CV que nécessaire."
+    },
+    "privacy": {
+      "title": "Protection de la Vie Privée",
+      "description": "Vos données sont cryptées de manière sécurisée et jamais partagées avec des tiers."
+    }
+  },
+  "templates": {
+    "title": "Choisissez Votre Modèle Parfait",
+    "modern": "Moderne",
+    "creative": "Créatif",
+    "professional": "Professionnel",
+    "simple": "Simple",
+    "executive": "Exécutif",
+    "academic": "Académique",
+    "useTemplate": "Utiliser Ce Modèle"
+  },
+  "signUp": {
+    "title": "Créez Votre Compte",
+    "emailLabel": "Adresse E-mail",
+    "emailPlaceholder": "Entrez votre e-mail",
+    "passwordLabel": "Mot de passe",
+    "passwordPlaceholder": "Créez un mot de passe",
+    "submit": "S'inscrire",
+    "alreadyHaveAccount": "Vous avez déjà un compte ?",
+    "signIn": "Se Connecter",
+    "error": "Une erreur s'est produite lors de l'inscription. Veuillez réessayer."
+  },
+  "signIn": {
+    "title": "Connectez-vous à Votre Compte",
+    "emailLabel": "Adresse E-mail",
+    "emailPlaceholder": "Entrez votre e-mail",
+    "passwordLabel": "Mot de passe",
+    "passwordPlaceholder": "Entrez votre mot de passe",
+    "submit": "Se Connecter",
+    "noAccount": "Vous n'avez pas de compte ?",
+    "signUp": "S'inscrire",
+    "error": "E-mail ou mot de passe invalide. Veuillez réessayer."
+  },
+  "about": {
+    "title": "À Propos de Resume Architect",
+    "mission": {
+      "title": "Notre Mission",
+      "description": "Chez Resume Architect, nous nous consacrons à donner aux chercheurs d'emploi les outils dont ils ont besoin pour créer des CV exceptionnels. Notre mission est de simplifier le processus de création de CV tout en fournissant des résultats professionnels et personnalisés qui aident nos utilisateurs à se démarquer dans le marché du travail compétitif d'aujourd'hui."
+    },
+    "community": {
+      "title": "Notre Communauté Grandissante",
+      "totalUsers": "Total des Utilisateurs Inscrits",
+      "description": "Rejoignez des milliers d'utilisateurs satisfaits qui ont créé et optimisé avec succès leurs CV en utilisant Resume Architect. Notre communauté est en constante croissance, et nous nous engageons à améliorer continuellement notre plateforme en fonction des commentaires des utilisateurs et des tendances de l'industrie."
+    },
+    "features": {
+      "title": "Fonctionnalités Clés",
+      "templates": "Large gamme de modèles professionnels",
+      "aiSuggestions": "Suggestions de contenu alimentées par l'IA",
+      "easyInterface": "Interface conviviale",
+      "multipleFormats": "Multiples formats de téléchargement",
+      "secureStorage": "Stockage sécurisé dans le cloud pour vos CV"
+    }
+  }
+}
