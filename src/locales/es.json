@@ -1,0 +1,146 @@
+{
+  "header": {
+    "home": "Inicio",
+    "templates": "Plantillas",
+    "features": "Características",
+    "pricing": "Precios",
+    "about": "Acerca de",
+    "buildResume": "Crear Currículum",
+    "signIn": "Iniciar Sesión",
+    "signOut": "Cerrar Sesión",
+    "account": "Cuenta"
+  },
+  "home": {
+    "title": "Crea tu Currículum Perfecto en Minutos",
+    "subtitle": "Plantillas profesionales, sugerencias impulsadas por IA y fácil personalización.",
+    "cta": "Crea tu Currículum Ahora",
+    "whyChoose": "¿Por qué elegir Resume Architect?",
+    "features": {
+      "easyToUse": {
+        "title": "Fácil de Usar",
+        "description": "Interfaz intuitiva que te guía en cada paso del proceso de creación del currículum."
+      },
+      "aiPowered": {
+        "title": "Impulsado por IA",
+        "description": "Aprovecha la inteligencia artificial para optimizar el contenido y la estructura de tu currículum."
+      },
+      "professionalTemplates": {
+        "title": "Plantillas Profesionales",
+        "description": "Elige entre una variedad de plantillas de currículum modernas y compatibles con ATS."
+      }
+    },
+    "readyToLand": "¿Listo para Conseguir el Trabajo de tus Sueños?",
+    "standOut": "Crea un currículum destacado que te haga notar por los mejores empleadores.",
+    "startBuilding": "Empieza a Crear tu Currículum"
+  },
+  "footer": {
+    "companyName": "Resume Architect",
+    "companyDescription": "Crea currículums profesionales con facilidad.",
+    "quickLinks": "Enlaces Rápidos",
+    "legal": "Legal",
+    "termsOfService": "Términos de Servicio",
+    "privacyPolicy": "Política de Privacidad",
+    "contactDeveloper": "Contactar al Desarrollador",
+    "connectOnLinkedIn": "Conectar en LinkedIn",
+    "allRightsReserved": "Todos los derechos reservados",
+    "languages": {
+      "english": "English",
+      "spanish": "Español",
+      "french": "Français"
+    }
+  },
+  "pricing": {
+    "title": "Precios Simples para Todos",
+    "free": "Gratis",
+    "features": {
+      "oneResume": "Crea y edita un currículum",
+      "allTemplates": "Acceso a todas las plantillas",
+      "pdfDownload": "Descarga en PDF",
+      "aiSuggestions": "Sugerencias básicas de IA"
+    },
+    "cta": {
+      "signedIn": "Empezar a Crear",
+      "notSignedIn": "Regístrate Gratis"
+    },
+    "startBuilding": "¡Empieza a crear tu currículum profesional hoy!"
+  },
+  "features": {
+    "title": "Potentes Características para Crear tu Currículum Perfecto",
+    "templates": {
+      "title": "Plantillas Profesionales",
+      "description": "Elige entre una amplia gama de plantillas diseñadas profesionalmente y compatibles con ATS."
+    },
+    "aiSuggestions": {
+      "title": "Sugerencias Impulsadas por IA",
+      "description": "Obtén sugerencias de contenido inteligentes para optimizar tu currículum para el trabajo que deseas."
+    },
+    "customization": {
+      "title": "Fácil Personalización",
+      "description": "Personaliza tu currículum con nuestra intuitiva interfaz de arrastrar y soltar."
+    },
+    "formats": {
+      "title": "Múltiples Formatos",
+      "description": "Descarga tu currículum en varios formatos, incluyendo PDF, Word y texto plano."
+    },
+    "downloads": {
+      "title": "Descargas Ilimitadas",
+      "description": "Crea y descarga tantas versiones de tu currículum como necesites."
+    },
+    "privacy": {
+      "title": "Protección de Privacidad",
+      "description": "Tus datos están encriptados de forma segura y nunca se comparten con terceros."
+    }
+  },
+  "templates": {
+    "title": "Elige tu Plantilla Perfecta",
+    "modern": "Moderno",
+    "creative": "Creativo",
+    "professional": "Profesional",
+    "simple": "Simple",
+    "executive": "Ejecutivo",
+    "academic": "Académico",
+    "useTemplate": "Usar Esta Plantilla"
+  },
+  "signUp": {
+    "title": "Crea tu Cuenta",
+    "emailLabel": "Correo Electrónico",
+    "emailPlaceholder": "Ingresa tu correo electrónico",
+    "passwordLabel": "Contraseña",
+    "passwordPlaceholder": "Crea una contraseña",
+    "submit": "Registrarse",
+    "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+    "signIn": "Iniciar Sesión",
+    "error": "Ocurrió un error durante el registro. Por favor, inténtalo de nuevo."
+  },
+  "signIn": {
+    "title": "Inicia Sesión en tu Cuenta",
+    "emailLabel": "Correo Electrónico",
+    "emailPlaceholder": "Ingresa tu correo electrónico",
+    "passwordLabel": "Contraseña",
+    "passwordPlaceholder": "Ingresa tu contraseña",
+    "submit": "Iniciar Sesión",
+    "noAccount": "¿No tienes una cuenta?",
+    "signUp": "Regístrate",
+    "error": "Correo electrónico o contraseña inválidos. Por favor, inténtalo de nuevo."
+  },
+  "about": {
+    "title": "Acerca de Resume Architect",
+    "mission": {
+      "title": "Nuestra Misión",
+      "description": "En Resume Architect, nos dedicamos a empoderar a los buscadores de empleo con las herramientas que necesitan para crear currículums sobresalientes. Nuestra misión es simplificar el proceso de creación de currículums mientras proporcionamos resultados profesionales y personalizados que ayudan a nuestros usuarios a destacar en el competitivo mercado laboral actual."
+    },
+    "community": {
+      "title": "Nuestra Comunidad en Crecimiento",
+      "totalUsers": "Total de Usuarios Registrados",
+      "description": "Únete a miles de usuarios satisfechos que han creado y optimizado con éxito sus currículums usando Resume Architect. Nuestra comunidad está en constante crecimiento, y estamos comprometidos a mejorar continuamente nuestra plataforma basándonos en los comentarios de los usuarios y las tendencias de la industria."
+    },
+    "features": {
+      "title": "Características Principales",
+      "templates": "Amplia gama de plantillas profesionales",
+      "aiSuggestions": "Sugerencias de contenido impulsadas por IA",
+      "easyInterface": "Interfaz fácil de usar",
+      "multipleFormats": "Múltiples formatos de descarga",
+      "secureStorage": "Almacenamiento seguro en la nube para tus currículums"
+    }
+  }
+}

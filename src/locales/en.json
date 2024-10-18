@@ -1,0 +1,146 @@
+{
+  "header": {
+    "home": "Home",
+    "templates": "Templates",
+    "features": "Features",
+    "pricing": "Pricing",
+    "about": "About",
+    "buildResume": "Build Resume",
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "account": "Account"
+  },
+  "home": {
+    "title": "Create Your Perfect Resume in Minutes",
+    "subtitle": "Professional templates, AI-powered suggestions, and easy customization.",
+    "cta": "Build Your Resume Now",
+    "whyChoose": "Why Choose Resume Architect?",
+    "features": {
+      "easyToUse": {
+        "title": "Easy to Use",
+        "description": "Intuitive interface that guides you through every step of the resume creation process."
+      },
+      "aiPowered": {
+        "title": "AI-Powered",
+        "description": "Leverage artificial intelligence to optimize your resume content and structure."
+      },
+      "professionalTemplates": {
+        "title": "Professional Templates",
+        "description": "Choose from a variety of modern, ATS-friendly resume templates."
+      }
+    },
+    "readyToLand": "Ready to Land Your Dream Job?",
+    "standOut": "Create a standout resume that gets you noticed by top employers.",
+    "startBuilding": "Start Building Your Resume"
+  },
+  "footer": {
+    "companyName": "Resume Architect",
+    "companyDescription": "Create professional resumes with ease.",
+    "quickLinks": "Quick Links",
+    "legal": "Legal",
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "contactDeveloper": "Contact the Developer",
+    "connectOnLinkedIn": "Connect on LinkedIn",
+    "allRightsReserved": "All rights reserved",
+    "languages": {
+      "english": "English",
+      "spanish": "Español",
+      "french": "Français"
+    }
+  },
+  "pricing": {
+    "title": "Simple Pricing for Everyone",
+    "free": "Free",
+    "features": {
+      "oneResume": "Create and edit one resume",
+      "allTemplates": "Access to all templates",
+      "pdfDownload": "Download as PDF",
+      "aiSuggestions": "Basic AI suggestions"
+    },
+    "cta": {
+      "signedIn": "Start Building",
+      "notSignedIn": "Sign Up Free"
+    },
+    "startBuilding": "Start building your professional resume today!"
+  },
+  "features": {
+    "title": "Powerful Features to Build Your Perfect Resume",
+    "templates": {
+      "title": "Professional Templates",
+      "description": "Choose from a wide range of ATS-friendly, professionally designed templates."
+    },
+    "aiSuggestions": {
+      "title": "AI-Powered Suggestions",
+      "description": "Get intelligent content suggestions to optimize your resume for your target job."
+    },
+    "customization": {
+      "title": "Easy Customization",
+      "description": "Personalize your resume with our intuitive drag-and-drop interface."
+    },
+    "formats": {
+      "title": "Multiple Formats",
+      "description": "Download your resume in various formats including PDF, Word, and plain text."
+    },
+    "downloads": {
+      "title": "Unlimited Downloads",
+      "description": "Create and download as many versions of your resume as you need."
+    },
+    "privacy": {
+      "title": "Privacy Protection",
+      "description": "Your data is securely encrypted and never shared with third parties."
+    }
+  },
+  "templates": {
+    "title": "Choose Your Perfect Template",
+    "modern": "Modern",
+    "creative": "Creative",
+    "professional": "Professional",
+    "simple": "Simple",
+    "executive": "Executive",
+    "academic": "Academic",
+    "useTemplate": "Use This Template"
+  },
+  "signUp": {
+    "title": "Create Your Account",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "Enter your email",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Create a password",
+    "submit": "Sign Up",
+    "alreadyHaveAccount": "Already have an account?",
+    "signIn": "Sign In",
+    "error": "An error occurred during sign up. Please try again."
+  },
+  "signIn": {
+    "title": "Sign In to Your Account",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "Enter your email",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "submit": "Sign In",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign Up",
+    "error": "Invalid email or password. Please try again."
+  },
+  "about": {
+    "title": "About Resume Architect",
+    "mission": {
+      "title": "Our Mission",
+      "description": "At Resume Architect, we're dedicated to empowering job seekers with the tools they need to create outstanding resumes. Our mission is to simplify the resume-building process while providing professional, tailored results that help our users stand out in today's competitive job market."
+    },
+    "community": {
+      "title": "Our Growing Community",
+      "totalUsers": "Total Registered Users",
+      "description": "Join thousands of satisfied users who have successfully created and optimized their resumes using Resume Architect. Our community is constantly growing, and we're committed to continually improving our platform based on user feedback and industry trends."
+    },
+    "features": {
+      "title": "Key Features",
+      "templates": "Wide range of professional templates",
+      "aiSuggestions": "AI-powered content suggestions",
+      "easyInterface": "User-friendly interface",
+      "multipleFormats": "Multiple download formats",
+      "secureStorage": "Secure cloud storage for your resumes"
+    }
+  }
+}
