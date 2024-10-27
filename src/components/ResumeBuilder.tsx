@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import PersonalInfo from './resume-sections/PersonalInfo';
 import Summary from './resume-sections/Summary';
@@ -12,9 +12,12 @@ import TemplateSelector from './TemplateSelector';
 import ResumePreview from './ResumePreview';
 import ErrorBoundary from './ErrorBoundary';
 import { Save, Download, ArrowLeft, ArrowRight } from 'lucide-react';
+import { ResumeData } from '../types/resume';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
-const initialResumeData = {
-  personalInfo: { fullName: '', email: '', phone: '', location: '', profileImage: null, title: '', website: '' },
+const initialResumeData: ResumeData = {
+  personalInfo: { fullName: '', email: '', phone: '', location: '', profileImage: undefined, title: '', website: '' },
   summary: '',
   experience: [],
   education: [],
@@ -52,12 +55,11 @@ const ResumeBuilder = () => {
     }
   }, []);
 
-  const updateResumeData = (section, data) => {
-    setResumeData(prev => {
-      const newData = { ...prev, [section]: data };
-      localStorage.setItem('resumeData', JSON.stringify(newData));
-      return newData;
-    });
+  const updateResumeData = (section: keyof ResumeData, data: any) => {
+    setResumeData(prev => ({
+      ...prev,
+      [section]: data
+    }));
   };
 
   const handleSave = () => {
@@ -65,14 +67,19 @@ const ResumeBuilder = () => {
     alert('Resume data saved successfully!');
   };
 
-  const handleExport = () => {
-    const blob = new Blob([JSON.stringify(resumeData, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'resume.json';
-    a.click();
-    URL.revokeObjectURL(url);
+  const handleExport = async () => {
+    if (resumeRef.current) {
+      const canvas = await html2canvas(resumeRef.current);
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'px',
+        format: [canvas.width, canvas.height]
+      });
+      
+      pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+      pdf.save('resume.pdf');
+    }
   };
 
   const currentSectionIndex = sections.findIndex(s => s.id === section);
@@ -91,6 +98,8 @@ const ResumeBuilder = () => {
       navigate('/build');
     }
   };
+
+  const resumeRef = useRef<HTMLDivElement>(null);
 
   if (location.pathname === '/build') {
     return (
@@ -140,8 +149,8 @@ const ResumeBuilder = () => {
             <ErrorBoundary>
               {CurrentSection && (
                 <CurrentSection
-                  data={resumeData[sections[currentSectionIndex].id.replace('-', '')]}
-                  updateData={(data) => updateResumeData(sections[currentSectionIndex].id.replace('-', ''), data)}
+                  data={resumeData[sections[currentSectionIndex].id.replace('-', '') as keyof ResumeData] as any}
+                  updateData={(data: any) => updateResumeData(sections[currentSectionIndex].id.replace('-', '') as keyof ResumeData, data)}
                 />
               )}
             </ErrorBoundary>
@@ -167,9 +176,11 @@ const ResumeBuilder = () => {
             <ErrorBoundary>
               <AIAssistant resumeData={resumeData} updateResumeData={updateResumeData} />
             </ErrorBoundary>
-            <ErrorBoundary>
-              <ResumePreview resumeData={resumeData} selectedTemplate={selectedTemplate} />
-            </ErrorBoundary>
+            <div ref={resumeRef}>
+              <ErrorBoundary>
+                <ResumePreview resumeData={resumeData} selectedTemplate={selectedTemplate} />
+              </ErrorBoundary>
+            </div>
             <div className="flex space-x-4">
               <button onClick={handleSave} className="btn-primary flex-1 flex items-center justify-center">
                 <Save className="w-5 h-5 mr-2" />
@@ -177,7 +188,7 @@ const ResumeBuilder = () => {
               </button>
               <button onClick={handleExport} className="btn-secondary flex-1 flex items-center justify-center">
                 <Download className="w-5 h-5 mr-2" />
-                Export
+                Export PDF
               </button>
             </div>
           </div>

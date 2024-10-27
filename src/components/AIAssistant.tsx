@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
 import { Sparkles, Check } from 'lucide-react';
+import { ResumeData } from '../types/resume';
 
-const AIAssistant = ({ resumeData, updateResumeData }) => {
-  const [suggestions, setSuggestions] = useState([]);
+interface AIAssistantProps {
+  resumeData: ResumeData;
+  updateResumeData: (section: keyof ResumeData, data: any) => void;
+}
+
+const AIAssistant: React.FC<AIAssistantProps> = ({ resumeData, updateResumeData }) => {
+  const [suggestions, setSuggestions] = useState<Array<{section: keyof ResumeData; content: any}>>([]);
   const [isGenerating, setIsGenerating] = useState(false);
 
   const generateSuggestions = () => {
     setIsGenerating(true);
     // Simulating AI-generated suggestions with a delay
     setTimeout(() => {
-      const aiSuggestions = [
+      const aiSuggestions: Array<{section: keyof ResumeData; content: any}> = [
         {
           section: 'summary',
           content: 'Experienced software developer with a passion for creating efficient and scalable web applications. Proficient in React, Node.js, and cloud technologies.',
@@ -20,11 +26,14 @@ const AIAssistant = ({ resumeData, updateResumeData }) => {
         },
         {
           section: 'experience',
-          content: {
+          content: [{
             company: 'Tech Innovators Inc.',
             position: 'Senior Software Engineer',
+            startDate: '2020-01-01',
+            endDate: '',
+            isPresent: true,
             description: 'Led a team of developers in creating a high-performance e-commerce platform using React and Node.js, resulting in a 40% increase in user engagement.',
-          },
+          }],
         },
       ];
       setSuggestions(aiSuggestions);
@@ -32,14 +41,8 @@ const AIAssistant = ({ resumeData, updateResumeData }) => {
     }, 2000);
   };
 
-  const applySuggestion = (suggestion) => {
-    if (suggestion.section === 'summary') {
-      updateResumeData('summary', suggestion.content);
-    } else if (suggestion.section === 'skills') {
-      updateResumeData('skills', [...new Set([...resumeData.skills, ...suggestion.content])]);
-    } else if (suggestion.section === 'experience') {
-      updateResumeData('experience', [...resumeData.experience, suggestion.content]);
-    }
+  const applySuggestion = (suggestion: {section: keyof ResumeData; content: any}) => {
+    updateResumeData(suggestion.section, suggestion.content);
     setSuggestions(suggestions.filter(s => s !== suggestion));
   };
 
@@ -57,7 +60,7 @@ const AIAssistant = ({ resumeData, updateResumeData }) => {
       <div className="space-y-4 max-h-80 overflow-y-auto scrollbar-hide">
         {suggestions.map((suggestion, index) => (
           <div key={index} className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg transform hover:scale-105">
-            <p className="mb-2 text-gray-700 dark:text-gray-300">{suggestion.content.toString()}</p>
+            <p className="mb-2 text-gray-700 dark:text-gray-300">{JSON.stringify(suggestion.content)}</p>
             <button
               onClick={() => applySuggestion(suggestion)}
               className="btn-primary text-sm flex items-center"

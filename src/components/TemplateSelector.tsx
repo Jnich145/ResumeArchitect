@@ -1,7 +1,14 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { ResumeData } from '../types/resume';
 
-const TemplateSelector = ({ selectedTemplate, setSelectedTemplate }) => {
+interface TemplateSelectorProps {
+  selectedTemplate: string;
+  setSelectedTemplate: (template: string) => void;
+  resumeData: ResumeData;
+}
+
+const TemplateSelector: React.FC<TemplateSelectorProps> = ({ selectedTemplate, setSelectedTemplate, resumeData }) => {
   const { t } = useTranslation();
 
   const templates = [

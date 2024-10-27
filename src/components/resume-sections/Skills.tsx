@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { Plus, X } from 'lucide-react';
 
-const Skills = ({ data, updateData }) => {
+interface SkillsProps {
+  data: string[];
+  updateData: (data: string[]) => void;
+}
+
+const Skills: React.FC<SkillsProps> = ({ data, updateData }) => {
   const [newSkill, setNewSkill] = useState('');
 
   const addSkill = () => {
@@ -11,7 +16,7 @@ const Skills = ({ data, updateData }) => {
     }
   };
 
-  const removeSkill = (skillToRemove) => {
+  const removeSkill = (skillToRemove: string) => {
     const updatedSkills = data.filter(skill => skill !== skillToRemove);
     updateData(updatedSkills);
   };
