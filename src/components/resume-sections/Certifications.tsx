@@ -1,18 +1,24 @@
 import React from 'react';
 import { Plus, Trash } from 'lucide-react';
+import { CertificationItem } from '../../types/resume';
 
-const Certifications = ({ data = [], updateData }) => {
+interface CertificationsProps {
+  data: CertificationItem[];
+  updateData: (data: CertificationItem[]) => void;
+}
+
+const Certifications: React.FC<CertificationsProps> = ({ data = [], updateData }) => {
   const addCertification = () => {
     updateData([...data, { name: '', issuer: '', date: '' }]);
   };
 
-  const updateCertification = (index, field, value) => {
+  const updateCertification = (index: number, field: keyof CertificationItem, value: string) => {
     const updatedCertifications = [...data];
-    updatedCertifications[index][field] = value;
+    updatedCertifications[index] = { ...updatedCertifications[index], [field]: value };
     updateData(updatedCertifications);
   };
 
-  const removeCertification = (index) => {
+  const removeCertification = (index: number) => {
     const updatedCertifications = data.filter((_, i) => i !== index);
     updateData(updatedCertifications);
   };
@@ -24,21 +30,21 @@ const Certifications = ({ data = [], updateData }) => {
         <div key={index} className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-md space-y-4 transition-all duration-300 hover:shadow-lg">
           <input
             type="text"
-            value={cert.name || ''}
+            value={cert.name}
             onChange={(e) => updateCertification(index, 'name', e.target.value)}
             placeholder="Certification Name"
             className="input-field"
           />
           <input
             type="text"
-            value={cert.issuer || ''}
+            value={cert.issuer}
             onChange={(e) => updateCertification(index, 'issuer', e.target.value)}
             placeholder="Issuing Organization"
             className="input-field"
           />
           <input
             type="date"
-            value={cert.date || ''}
+            value={cert.date}
             onChange={(e) => updateCertification(index, 'date', e.target.value)}
             className="input-field"
           />

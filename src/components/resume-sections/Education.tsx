@@ -1,18 +1,24 @@
 import React from 'react';
 import { Plus, Trash } from 'lucide-react';
+import { EducationItem } from '../../types/resume';
 
-const Education = ({ data, updateData }) => {
+interface EducationProps {
+  data: EducationItem[];
+  updateData: (data: EducationItem[]) => void;
+}
+
+const Education: React.FC<EducationProps> = ({ data = [], updateData }) => {
   const addEducation = () => {
     updateData([...data, { institution: '', degree: '', fieldOfStudy: '', startDate: '', endDate: '', isPresent: false }]);
   };
 
-  const updateEducation = (index, field, value) => {
+  const updateEducation = (index: number, field: keyof EducationItem, value: string | boolean) => {
     const updatedEducation = [...data];
-    updatedEducation[index][field] = value;
+    updatedEducation[index] = { ...updatedEducation[index], [field]: value };
     updateData(updatedEducation);
   };
 
-  const removeEducation = (index) => {
+  const removeEducation = (index: number) => {
     const updatedEducation = data.filter((_, i) => i !== index);
     updateData(updatedEducation);
   };
@@ -24,21 +30,21 @@ const Education = ({ data, updateData }) => {
         <div key={index} className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-md space-y-4 transition-all duration-300 hover:shadow-lg">
           <input
             type="text"
-            value={edu.institution || ''}
+            value={edu.institution}
             onChange={(e) => updateEducation(index, 'institution', e.target.value)}
             placeholder="Institution"
             className="input-field"
           />
           <input
             type="text"
-            value={edu.degree || ''}
+            value={edu.degree}
             onChange={(e) => updateEducation(index, 'degree', e.target.value)}
             placeholder="Degree"
             className="input-field"
           />
           <input
             type="text"
-            value={edu.fieldOfStudy || ''}
+            value={edu.fieldOfStudy}
             onChange={(e) => updateEducation(index, 'fieldOfStudy', e.target.value)}
             placeholder="Field of Study"
             className="input-field"
@@ -46,33 +52,26 @@ const Education = ({ data, updateData }) => {
           <div className="flex space-x-4">
             <input
               type="date"
-              value={edu.startDate || ''}
+              value={edu.startDate}
               onChange={(e) => updateEducation(index, 'startDate', e.target.value)}
               className="input-field w-1/2"
             />
-            <div className="w-1/2 flex space-x-2">
-              <input
-                type="date"
-                value={edu.endDate || ''}
-                onChange={(e) => updateEducation(index, 'endDate', e.target.value)}
-                className={`input-field flex-grow ${edu.isPresent ? 'opacity-50' : ''}`}
-                disabled={edu.isPresent}
-              />
-              <label className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-300">
-                <input
-                  type="checkbox"
-                  checked={edu.isPresent || false}
-                  onChange={(e) => {
-                    updateEducation(index, 'isPresent', e.target.checked);
-                    if (e.target.checked) {
-                      updateEducation(index, 'endDate', '');
-                    }
-                  }}
-                  className="form-checkbox h-4 w-4 text-blue-600 transition duration-150 ease-in-out"
-                />
-                <span>Present</span>
-              </label>
-            </div>
+            <input
+              type="date"
+              value={edu.endDate}
+              onChange={(e) => updateEducation(index, 'endDate', e.target.value)}
+              className="input-field w-1/2"
+              disabled={edu.isPresent}
+            />
+          </div>
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              checked={edu.isPresent}
+              onChange={(e) => updateEducation(index, 'isPresent', e.target.checked)}
+              className="mr-2"
+            />
+            <label>Currently studying here</label>
           </div>
           <button onClick={() => removeEducation(index)} className="btn-danger flex items-center">
             <Trash size={20} className="mr-2" />

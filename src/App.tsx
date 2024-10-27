@@ -17,6 +17,7 @@ import { LanguageProvider } from './contexts/LanguageContext';
 import TermsOfService from './components/TermsOfService';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import About from './components/About';
+import UserProfile from './components/UserProfile';
 
 function App() {
   return (
@@ -48,6 +49,11 @@ function App() {
                   <Route path="/terms" element={<TermsOfService />} />
                   <Route path="/privacy" element={<PrivacyPolicy />} />
                   <Route path="/about" element={<About />} />
+                  <Route path="/profile" element={
+                    <PrivateRoute>
+                      <UserProfile />
+                    </PrivateRoute>
+                  } />
                 </Routes>
               </main>
               <Footer />

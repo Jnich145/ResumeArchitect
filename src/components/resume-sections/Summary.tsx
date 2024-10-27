@@ -1,6 +1,11 @@
 import React from 'react';
 
-const Summary = ({ data, updateData }) => {
+interface SummaryProps {
+  data: string;
+  updateData: (data: string) => void;
+}
+
+const Summary: React.FC<SummaryProps> = ({ data, updateData }) => {
   return (
     <div className="space-y-4">
       <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Professional Summary</h3>

@@ -4,6 +4,12 @@ import { FileText, Star, Users, Zap } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import Carousel from './Carousel';
 
+interface FeatureCardProps {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}
+
 const Home: React.FC = () => {
   const { t } = useTranslation();
 
@@ -78,7 +84,7 @@ const Home: React.FC = () => {
   );
 };
 
-const FeatureCard = ({ icon, title, description }) => (
+const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description }) => (
   <div className="card hover:scale-105 flex flex-col items-center">
     <div className="flex justify-center mb-6">{icon}</div>
     <h3 className="text-xl font-semibold mb-4 text-center text-gray-800 dark:text-white">{title}</h3>

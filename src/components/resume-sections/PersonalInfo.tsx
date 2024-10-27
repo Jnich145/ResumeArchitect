@@ -1,18 +1,33 @@
 import React from 'react';
 import { Camera } from 'lucide-react';
 
-const PersonalInfo = ({ data, updateData }) => {
-  const handleChange = (e) => {
+interface PersonalInfoData {
+  profileImage?: string;
+  fullName?: string;
+  title?: string;
+  email?: string;
+  phone?: string;
+  location?: string;
+  website?: string;
+}
+
+interface PersonalInfoProps {
+  data: PersonalInfoData;
+  updateData: (data: PersonalInfoData) => void;
+}
+
+const PersonalInfo: React.FC<PersonalInfoProps> = ({ data, updateData }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     updateData({ ...data, [name]: value });
   };
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        updateData({ ...data, profileImage: reader.result });
+        updateData({ ...data, profileImage: reader.result as string });
       };
       reader.readAsDataURL(file);
     }
