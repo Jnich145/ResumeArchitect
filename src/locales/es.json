@@ -103,13 +103,21 @@
   },
   "signUp": {
     "title": "Crea tu Cuenta",
+    "nameLabel": "Nombre Completo",
+    "namePlaceholder": "Ingresa tu nombre completo",
     "emailLabel": "Correo Electrónico",
     "emailPlaceholder": "Ingresa tu correo electrónico",
     "passwordLabel": "Contraseña",
     "passwordPlaceholder": "Crea una contraseña",
     "submit": "Registrarse",
+    "loading": "Registrando...",
     "alreadyHaveAccount": "¿Ya tienes una cuenta?",
     "signIn": "Iniciar Sesión",
+    "errors": {
+      "nameRequired": "El nombre es obligatorio",
+      "invalidEmail": "Por favor ingresa un correo electrónico válido",
+      "passwordLength": "La contraseña debe tener al menos 6 caracteres"
+    },
     "error": "Ocurrió un error durante el registro. Por favor, inténtalo de nuevo."
   },
   "signIn": {
@@ -119,6 +127,7 @@
     "passwordLabel": "Contraseña",
     "passwordPlaceholder": "Ingresa tu contraseña",
     "submit": "Iniciar Sesión",
+    "loading": "Iniciando sesión...",
     "noAccount": "¿No tienes una cuenta?",
     "signUp": "Regístrate",
     "error": "Correo electrónico o contraseña inválidos. Por favor, inténtalo de nuevo."

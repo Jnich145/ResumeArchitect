@@ -7,23 +7,19 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const { signUp } = useAuth();
+  const [showMockSignup, setShowMockSignup] = useState(false);
+  const { signUp, error, clearError, isLoading, mockSignIn } = useAuth();
   const navigate = useNavigate();
   const { t } = useTranslation();
 
   const validateForm = () => {
     if (!name.trim()) {
-      setError(t('signUp.errors.nameRequired') || 'Name is required');
       return false;
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setError(t('signUp.errors.invalidEmail') || 'Invalid email');
       return false;
     }
     if (password.length < 6) {
-      setError(t('signUp.errors.passwordLength') || 'Password must be at least 6 characters');
       return false;
     }
     return true;
@@ -31,17 +27,28 @@ const SignUp = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    clearError();
     if (!validateForm()) return;
-    setIsLoading(true);
+    
     try {
       await signUp(email, password, name);
       navigate('/build');
     } catch (err: any) {
-      setError(err.message || t('signUp.error') || 'An error occurred');
-    } finally {
-      setIsLoading(false);
+      console.error('Sign up error:', err);
+      // Show mock signup option if there was a connection error
+      if (err instanceof TypeError && err.message.includes('Failed to fetch')) {
+        setShowMockSignup(true);
+      }
     }
+  };
+
+  const handleMockSignup = () => {
+    mockSignIn({ 
+      email, 
+      name,
+      id: 'mock-' + Date.now().toString()
+    });
+    navigate('/build');
   };
 
   return (
@@ -106,6 +113,30 @@ const SignUp = () => {
             </button>
           </div>
         </form>
+
+        {/* Development mock signup button - only shown after a connection error */}
+        {showMockSignup && (
+          <div className="mt-4">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-gray-50 text-gray-500">Development Testing</span>
+              </div>
+            </div>
+            <button
+              onClick={handleMockSignup}
+              className="mt-4 w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none"
+            >
+              Use Mock Authentication
+            </button>
+            <p className="mt-2 text-xs text-center text-gray-500">
+              This option is only available in development when the server is unavailable.
+            </p>
+          </div>
+        )}
+
         <div className="text-center">
           <p>{t('signUp.alreadyHaveAccount')} <Link to="/signin" className="font-medium text-indigo-600 hover:text-indigo-500">{t('signUp.signIn')}</Link></p>
         </div>

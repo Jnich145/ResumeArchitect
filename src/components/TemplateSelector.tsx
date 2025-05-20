@@ -20,6 +20,15 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({ selectedTemplate, s
     { id: 'academic', name: t('templates.academic'), image: '/images/Gray and White Simple Clean Resume.jpg' },
   ];
 
+  const handleSelectTemplate = (templateId: string) => {
+    setSelectedTemplate(templateId);
+    // Scroll to the preview section to see changes
+    const previewElement = document.querySelector('.resume-preview');
+    if (previewElement) {
+      previewElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 animate-float">
       <h3 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">{t('templateSelector.title')}</h3>
@@ -32,17 +41,18 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({ selectedTemplate, s
                 ? 'ring-4 ring-blue-500 dark:ring-blue-400'
                 : 'hover:shadow-lg'
             }`}
-            onClick={() => setSelectedTemplate(template.id)}
+            onClick={() => handleSelectTemplate(template.id)}
           >
             <div className="bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden">
-              <div className="p-4">
-                <h4 className="text-lg font-semibold mb-2 text-gray-800 dark:text-white">{template.name}</h4>
+              <div className="p-2">
+                <h4 className="text-sm font-semibold text-gray-800 dark:text-white">{template.name}</h4>
               </div>
-              <div className="h-64 overflow-hidden">
+              <div className="aspect-[1/1.4] relative">
                 <img 
                   src={template.image} 
                   alt={`${template.name} Template`}
-                  className="w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full object-cover object-top"
+                  loading="lazy"
                 />
               </div>
             </div>

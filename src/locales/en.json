@@ -103,6 +103,8 @@
   },
   "signUp": {
     "title": "Create Your Account",
+    "nameLabel": "Full Name",
+    "namePlaceholder": "Enter your full name",
     "emailLabel": "Email Address",
     "emailPlaceholder": "Enter your email",
     "passwordLabel": "Password",
@@ -110,6 +112,12 @@
     "submit": "Sign Up",
     "alreadyHaveAccount": "Already have an account?",
     "signIn": "Sign In",
+    "loading": "Signing up...",
+    "errors": {
+      "nameRequired": "Name is required",
+      "invalidEmail": "Please enter a valid email address",
+      "passwordLength": "Password must be at least 6 characters"
+    },
     "error": "An error occurred during sign up. Please try again."
   },
   "signIn": {
@@ -119,6 +127,7 @@
     "passwordLabel": "Password",
     "passwordPlaceholder": "Enter your password",
     "submit": "Sign In",
+    "loading": "Signing in...",
     "noAccount": "Don't have an account?",
     "signUp": "Sign Up",
     "error": "Invalid email or password. Please try again."

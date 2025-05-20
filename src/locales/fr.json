@@ -103,13 +103,21 @@
   },
   "signUp": {
     "title": "Créez Votre Compte",
+    "nameLabel": "Nom Complet",
+    "namePlaceholder": "Entrez votre nom complet",
     "emailLabel": "Adresse E-mail",
     "emailPlaceholder": "Entrez votre e-mail",
     "passwordLabel": "Mot de passe",
     "passwordPlaceholder": "Créez un mot de passe",
     "submit": "S'inscrire",
+    "loading": "Inscription en cours...",
     "alreadyHaveAccount": "Vous avez déjà un compte ?",
     "signIn": "Se Connecter",
+    "errors": {
+      "nameRequired": "Le nom est requis",
+      "invalidEmail": "Veuillez entrer une adresse e-mail valide",
+      "passwordLength": "Le mot de passe doit contenir au moins 6 caractères"
+    },
     "error": "Une erreur s'est produite lors de l'inscription. Veuillez réessayer."
   },
   "signIn": {
@@ -119,6 +127,7 @@
     "passwordLabel": "Mot de passe",
     "passwordPlaceholder": "Entrez votre mot de passe",
     "submit": "Se Connecter",
+    "loading": "Connexion en cours...",
     "noAccount": "Vous n'avez pas de compte ?",
     "signUp": "S'inscrire",
     "error": "E-mail ou mot de passe invalide. Veuillez réessayer."
