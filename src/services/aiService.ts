@@ -153,6 +153,30 @@ export const generateResumeSuggestions = async (
   );
 };
 
+// Improve summary based on conversation and context
+export const improveSummary = async (
+  content: string
+): Promise<string> => {
+  const uniqueContent = addUniqueIdentifier(content);
+  
+  try {
+    const response = await fetchApi<{ improvedContent: string }>(
+      `${API_URL}/ai/improve`,
+      'POST',
+      { content: uniqueContent, contentType: 'summary' }
+    );
+    
+    return response.improvedContent;
+  } catch (error) {
+    // If API call fails, use fallback mock responses in development
+    if (process.env.NODE_ENV === 'development') {
+      console.warn('Falling back to mock response for improveSummary');
+      return getMockImprovedContent('summary', content);
+    }
+    throw error;
+  }
+};
+
 // Mock responses for development fallbacks
 const getMockImprovedContent = (fieldType: string, content: string): string => {
   switch (fieldType) {
