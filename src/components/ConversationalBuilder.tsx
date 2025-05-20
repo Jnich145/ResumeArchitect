@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import { Sparkles, FileText, Info } from 'lucide-react';
+import { Sparkles, FileText, Info, MessageSquare, Layout } from 'lucide-react';
 import ChatInterface from './chat/ChatInterface';
+import TemplatePreview from './chat/TemplatePreview';
 import { ResumeData } from '../types/resume';
 import { improveSummary, generateBulletPoints } from '../services/aiService';
 
@@ -21,6 +22,9 @@ interface ConversationState {
   completedTopics: string[];
   extractedData: Partial<ResumeData>;
 }
+
+// Define view mode
+type ViewMode = 'chat' | 'preview';
 
 // Initial conversation flow
 const initialConversation: ConversationState = {
@@ -80,6 +84,8 @@ const ConversationalBuilder: React.FC = () => {
   const [conversation, setConversation] = useState<ConversationState>(initialConversation);
   const [resumeData, setResumeData] = useState<Partial<ResumeData>>({});
   const [suggested, setSuggested] = useState<string[]>([]);
+  const [viewMode, setViewMode] = useState<ViewMode>('chat');
+  const [selectedTemplate, setSelectedTemplate] = useState<string>('modern');
   const navigate = useNavigate();
 
   // Initialize chat with greeting
@@ -93,6 +99,12 @@ const ConversationalBuilder: React.FC = () => {
     setMessages([initialMessage]);
     setSuggested(suggestedResponses.introduction || []);
   }, []);
+
+  // Determine if we have enough information to show a preview
+  const canShowPreview = 
+    conversation.completedTopics.includes('skills') || 
+    conversation.currentTopic === 'complete' ||
+    conversation.currentTopic === 'achievements';
 
   // Simulate AI typing for a more natural interaction
   const simulateTyping = async (delay = 1000) => {
@@ -219,6 +231,7 @@ const ConversationalBuilder: React.FC = () => {
             fieldOfStudy: '',
             startDate: '',
             endDate: '',
+            isPresent: false,
             description: ''
           });
           
@@ -238,7 +251,7 @@ const ConversationalBuilder: React.FC = () => {
           
           // Move to next topic
           advanceTopic();
-          response = dialogFlowQuestions.challenges;
+          response = dialogFlowQuestions.challenges + "\n\nAfter this question, I'll have enough information to show you a preview of your resume.";
           break;
           
         case 'challenges':
@@ -266,52 +279,49 @@ const ConversationalBuilder: React.FC = () => {
             completedTopics: [...prev.completedTopics, prev.currentTopic],
             pendingQuestions: []
           }));
+
+          // Show the preview tab automatically
+          setViewMode('preview');
           
           // Final response
-          response = `Thank you for sharing all this information! I've drafted a resume based on our conversation. You can now review and edit each section.
+          response = `Thank you for sharing all this information! I've drafted a resume based on our conversation. You can now preview it with different templates.
 
-Would you like to:
-1. View and edit your resume
+You can:
+1. Switch between templates to find one you like
 2. Continue our conversation to add more details
-3. Start over with a new resume`;
+3. Proceed to the full editor for final touches`;
           
           setSuggested([
-            "View my resume",
             "Add more details",
-            "Start over"
+            "Go to full editor",
+            "Which template looks best?"
           ]);
           break;
           
         case 'complete':
-          if (message.toLowerCase().includes('view') || message.includes('1')) {
+          if (message.toLowerCase().includes('editor') || message.includes('full editor')) {
             // Save data and navigate to resume builder
             saveAndNavigate(updatedData);
             return;
-          } else if (message.toLowerCase().includes('add') || message.includes('2')) {
+          } else if (message.toLowerCase().includes('add more') || message.includes('details')) {
             response = "Great! What else would you like to add to your resume?";
             // Reset to achievements topic for additional information
             setConversation(prev => ({
               ...prev,
               currentTopic: 'achievements'
             }));
-          } else if (message.toLowerCase().includes('start') || message.includes('3')) {
-            // Reset conversation
-            setConversation(initialConversation);
-            setResumeData({});
-            setMessages([{
-              id: uuidv4(),
-              content: INITIAL_MESSAGE,
-              sender: 'ai',
-              timestamp: new Date()
-            }]);
-            setSuggested(suggestedResponses.introduction || []);
-            return;
+            // Switch back to chat view
+            setViewMode('chat');
+          } else if (message.toLowerCase().includes('template') || message.toLowerCase().includes('looks best')) {
+            response = "You can browse through different templates using the preview tab. Each template has a different style and layout. Choose one that best represents your professional identity and the role you're applying for.";
+            // Switch to preview mode
+            setViewMode('preview');
           } else {
-            response = "I'm not sure I understood. Would you like to view your resume, add more details, or start over?";
+            response = "I'm not sure I understood. Would you like to add more details, go to the full editor, or discuss which template would work best for you?";
             setSuggested([
-              "View my resume",
               "Add more details",
-              "Start over"
+              "Go to full editor",
+              "Which template looks best?"
             ]);
           }
           break;
@@ -344,10 +354,11 @@ Would you like to:
             }
           }
           
-          response = "I've added that achievement. Would you like to add another achievement or view your resume?";
+          response = "I've added that achievement. Would you like to add another achievement, view your resume with different templates, or go to the full editor?";
           setSuggested([
             "Add another achievement",
-            "View my resume"
+            "View templates",
+            "Go to full editor"
           ]);
           break;
           
@@ -410,11 +421,32 @@ Would you like to:
   
   // Save resume data and navigate to the builder
   const saveAndNavigate = (data: Partial<ResumeData>) => {
-    // Store data in localStorage for now
-    localStorage.setItem('resumeData', JSON.stringify(data));
+    // Store data in localStorage for now, including the template
+    const dataWithTemplate = {
+      ...data,
+      template: selectedTemplate
+    };
+    localStorage.setItem('resumeData', JSON.stringify(dataWithTemplate));
     
     // Navigate to resume builder
     navigate('/build/personal-info');
+  };
+  
+  // Handle template selection
+  const handleTemplateSelect = (template: string) => {
+    setSelectedTemplate(template);
+    
+    // If we're in complete state, add a message about the template selection
+    if (conversation.currentTopic === 'complete' || conversation.currentTopic === 'achievements') {
+      const templateMessage: Message = {
+        id: uuidv4(),
+        content: `You've selected the ${template.charAt(0).toUpperCase() + template.slice(1)} template. It's a great choice! You can always change it later in the full editor.`,
+        sender: 'ai',
+        timestamp: new Date()
+      };
+      
+      setMessages(prevMessages => [...prevMessages, templateMessage]);
+    }
   };
   
   // Simple entity extraction functions
@@ -513,13 +545,60 @@ Would you like to:
         </div>
       )}
       
-      <ChatInterface 
-        messages={messages}
-        onSendMessage={handleSendMessage}
-        isTyping={isTyping}
-        suggestedResponses={suggested}
-        onSuggestedResponseClick={handleSuggestedResponseClick}
-      />
+      {/* Tab navigation for chat and preview (only show when we have enough info) */}
+      {canShowPreview && (
+        <div className="mb-4 border-b border-gray-200 dark:border-gray-700">
+          <ul className="flex flex-wrap -mb-px">
+            <li className="mr-2">
+              <button 
+                onClick={() => setViewMode('chat')}
+                className={`inline-flex items-center px-4 py-2 rounded-t-lg ${
+                  viewMode === 'chat' 
+                    ? 'border-b-2 border-blue-600 text-blue-600 dark:text-blue-500 dark:border-blue-500' 
+                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                }`}
+              >
+                <MessageSquare className="mr-2" size={18} />
+                Chat
+              </button>
+            </li>
+            <li className="mr-2">
+              <button 
+                onClick={() => setViewMode('preview')}
+                className={`inline-flex items-center px-4 py-2 rounded-t-lg ${
+                  viewMode === 'preview' 
+                    ? 'border-b-2 border-blue-600 text-blue-600 dark:text-blue-500 dark:border-blue-500' 
+                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                }`}
+              >
+                <Layout className="mr-2" size={18} />
+                Template Preview
+              </button>
+            </li>
+          </ul>
+        </div>
+      )}
+      
+      {/* Content area - show either chat or preview */}
+      <div className="relative">
+        {viewMode === 'chat' && (
+          <ChatInterface 
+            messages={messages}
+            onSendMessage={handleSendMessage}
+            isTyping={isTyping}
+            suggestedResponses={suggested}
+            onSuggestedResponseClick={handleSuggestedResponseClick}
+          />
+        )}
+        
+        {viewMode === 'preview' && canShowPreview && (
+          <TemplatePreview 
+            resumeData={resumeData}
+            onTemplateSelect={handleTemplateSelect}
+            selectedTemplate={selectedTemplate}
+          />
+        )}
+      </div>
       
       {conversation.currentTopic === 'complete' && (
         <div className="mt-4 flex justify-center">
