@@ -28,8 +28,13 @@ ResumeArchitect is an AI-enhanced, multi-template resume builder that helps user
 - 📱 Responsive design for all devices
 - 🌐 Internationalization support
 - 🎯 Perfect PDF export
+- 💬 Conversational UI for guided resume creation
+  - Chat-based interface for information collection
+  - Natural language processing to extract professional details
+  - AI enhancement of casual descriptions into polished content
+  - Real-time template preview during conversation
 
-## 🛠️ Technology Stack
+## ��️ Technology Stack
 
 - **Frontend**: React + TypeScript + TailwindCSS
 - **Backend**: Node.js + Express
