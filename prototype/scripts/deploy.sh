@@ -1,6 +1,10 @@
 #!/bin/bash
 
-# Deploy script for ResumeArchitect
+# Archived prototype: deployment is disabled pending security remediation.
+printf '%s\n' 'This archived prototype is not approved for deployment. See prototype/README.md.' >&2
+exit 1
+
+# Historical deploy script for ResumeArchitect
 # Usage: ./scripts/deploy.sh [staging|production]
 
 # Set default environment to staging
