@@ -28,3 +28,8 @@ lerna-debug.log*
 
 node_modules
 dist-ssr
+# Generated checks and local resume files
+coverage/
+playwright-report/
+test-results/
+*.resume.json
