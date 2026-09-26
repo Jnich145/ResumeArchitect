@@ -1,223 +1,68 @@
-# 🚀 ResumeArchitect
+# ResumeArchitect
 
-ResumeArchitect is an AI-enhanced, multi-template resume builder that helps users create professional resumes with intelligent suggestions and ATS compatibility analysis.
+A conversational resume-builder prototype by [Justin Nichols](https://github.com/Jnich145). It explores guided information collection, live template previews, and AI-assisted editing in one workspace.
 
-## 📋 Table of Contents
-- [Features](#-features)
-- [Technology Stack](#-technology-stack)
-- [Setup Guide](#-setup-guide)
-  - [Required API Keys](#required-api-keys-and-external-services)
-  - [Environment Variables](#environment-variables)
-  - [Local Development](#local-development)
-  - [Mock Services](#mock-service-option)
-- [Production Deployment](#-production-deployment-requirements)
-- [Deployment Scripts](#-using-the-built-in-deployment-scripts)
-- [Troubleshooting](#-troubleshooting-common-issues)
-- [Contributing](#-contributing)
-- [License](#-license)
+**Status:** development prototype. The repository includes application code and tests, but this page does not establish a working production deployment, validated ATS outcomes, or production-ready authentication and billing.
 
-## ✨ Features
+## What is here
 
-- 🎨 Multiple professional templates with customization options
-- 💾 Auto-save with visual feedback
-- 📝 AI-powered content suggestions and improvements
-- 🤖 ATS compatibility analysis and scoring
-- 📊 Resume analytics dashboard
-- 🔒 Secure authentication and user management
-- 💳 Subscription-based premium features
-- 📱 Responsive design for all devices
-- 🌐 Internationalization support
-- 🎯 Perfect PDF export
-- 💬 Conversational UI for guided resume creation
-  - Chat-based interface for information collection
-  - Natural language processing to extract professional details
-  - AI enhancement of casual descriptions into polished content
-  - Real-time template preview during conversation
+- React/TypeScript interface with a conversational builder, multiple resume templates, and PDF export code.
+- Express API with MongoDB models for users, resumes, and subscriptions.
+- OpenAI-assisted editing, ATS analysis, analytics, and Stripe integration code, with development fallbacks in some paths.
+- Jest/component tests and Cypress workflow tests.
 
-## ��️ Technology Stack
+Start with [the conversational builder](src/components/ConversationalBuilder.tsx), [server entry point](src/server/index.ts), or [package scripts](package.json).
 
-- **Frontend**: React + TypeScript + TailwindCSS
-- **Backend**: Node.js + Express
-- **Database**: MongoDB
-- **State Management**: React Context + Hooks
-- **PDF Generation**: jsPDF + html2canvas
-- **AI Integration**: OpenAI API
-- **Authentication**: JWT with HttpOnly cookies
-- **Payment Processing**: Stripe
-- **Internationalization**: i18next
+## Local development
 
-## 🚀 Setup Guide
+The commands below follow the repository scripts. They have not been revalidated as a complete running application during this documentation refresh.
 
-### Required API Keys and External Services
-
-#### 1. MongoDB Database
-- **Where to get it**: [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
-- **What to do**:
-  - Create a free account
-  - Create a new cluster
-  - Set up a database user with password
-  - Get your connection string from "Connect" > "Connect your application"
-
-#### 2. OpenAI API
-- **Where to get it**: [OpenAI Platform](https://platform.openai.com/)
-- **What to do**:
-  - Create an account
-  - Go to API keys section
-  - Create a new secret key
-  - Note: Free tier has limited usage; for production, you'll need to add billing
-
-#### 3. Stripe API
-- **Where to get it**: [Stripe Dashboard](https://dashboard.stripe.com/)
-- **What to do**:
-  - Create an account
-  - Get your test API keys from the Developers section
-  - Create products and pricing plans (for subscription tiers)
-  - Note product/price IDs for your plans
-
-### Environment Variables
-
-Create a `.env` file in the root directory with the following variables:
-
+```bash
+git clone https://github.com/Jnich145/ResumeArchitect.git
+cd ResumeArchitect
+npm ci
 ```
-# Server Configuration
-PORT=3001
+
+Create a local `.env` in the repository root. Supply your own development values; keep them out of Git:
+
+```dotenv
 NODE_ENV=development
-
-# MongoDB Connection
-MONGODB_URI=mongodb+srv://username:password@cluster0.example.mongodb.net/resumeArchitect?retryWrites=true&w=majority
-
-# JWT Configuration
-JWT_SECRET=your_jwt_secret_key_here
-JWT_REFRESH_SECRET=your_jwt_refresh_secret_here
-JWT_EXPIRE=1h
-JWT_REFRESH_EXPIRE=7d
-
-# Client URL
+PORT=3001
 CLIENT_URL=http://localhost:5173
-
-# OpenAI API
-OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-OPENAI_MODEL=gpt-4o
-
-# Stripe Integration
-STRIPE_SECRET_KEY=sk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-STRIPE_WEBHOOK_SECRET=whsec_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-STRIPE_PRICE_BASIC=price_xxxxxxxxxxxxxxxxxxxxxxxx
-STRIPE_PRICE_PREMIUM=price_xxxxxxxxxxxxxxxxxxxxxxxx
+VITE_API_URL=http://localhost:3001/api
+MONGODB_URI=mongodb://127.0.0.1:27017/resumeArchitect
+JWT_SECRET=replace-with-a-local-secret
+ACCESS_TOKEN_SECRET=replace-with-a-local-secret
+REFRESH_TOKEN_SECRET=replace-with-another-local-secret
 ```
 
-### Local Development
+For live AI editing, add `OPENAI_API_KEY`. For Stripe test integration, the service reads `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_BASIC_PRICE_ID`, and `STRIPE_PREMIUM_PRICE_ID`. Use your own test configuration; no API credentials are included here.
 
-1. **Clone and Install Dependencies**:
-   ```bash
-   git clone https://github.com/your-username/resumearchitect.git
-   cd resumearchitect
-   npm install
-   ```
-
-2. **Start Development Servers**:
-   ```bash
-   # Run both frontend and backend
-   npm run dev:all
-
-   # Or run them separately
-   npm run dev          # Frontend
-   npm run dev:server   # Backend
-   ```
-
-3. **Access the Application**:
-   - Frontend: `http://localhost:5173`
-   - Backend API: `http://localhost:3001`
-
-### Mock Service Option
-
-For testing without real API keys, the application includes mock implementations:
-
-- If no OpenAI API key is provided, the app will use mock AI responses
-- If no Stripe API key is provided, the app will simulate subscription functionality
-- If no MongoDB URI is provided, a mock database will be used
-
-You'll see warning messages like these when using mock services:
-```
-⚠️ No Stripe API key found. Using mock Stripe implementation for development.
-⚠️ No OpenAI API key found. Using mock AI implementation for development.
+```bash
+npm run dev:all
 ```
 
-This mock mode is perfect for UI testing and development but won't provide real data processing or storage.
+The intended frontend URL is `http://localhost:5173`; the API defaults to `http://localhost:3001`. The frontend and backend can also be started separately with `npm run dev` and `npm run dev:server`.
 
-## 🚀 Production Deployment Requirements
+## Current limitations
 
-For a production-ready deployment, you need to:
+- Development mode bypasses authentication in [the auth middleware](src/server/middleware/auth.ts). Keep this mode confined to local development with synthetic resume data.
+- Token creation and verification currently use different settings and cookie names in [the controller](src/server/controllers/authController.ts) and middleware. Authentication needs reconciliation before deployment; setting environment variables alone does not resolve that mismatch.
+- Missing AI or Stripe keys can select mock behavior. A missing MongoDB URI only skips the connection in [the database module](src/server/db.ts); it is not a substitute for a working persistent database across all routes.
+- ATS scores and AI suggestions are application outputs, not a guarantee of employer screening results. PDF rendering also needs checking against the chosen template and content.
+- Deployment scripts exist, but a successful build, service integration, security review, and a verified deployment are separate milestones.
 
-1. **MongoDB Production Database**:
-   - Set up a production MongoDB cluster with backups
-   - Implement proper security measures (network access, strong password)
-   - Consider MongoDB Atlas dedicated cluster for performance
+## Existing checks
 
-2. **OpenAI API Configuration**:
-   - Add a payment method to your OpenAI account
-   - Set usage limits to control costs
-   - Monitor token usage regularly
-   - Consider using GPT-3.5-Turbo for cost savings on non-critical features
+```bash
+npm test
+npm run build
+npm run build:server
+npm run lint
+# Requires the application and Cypress environment:
+npm run test:e2e
+```
 
-3. **Stripe Production Setup**:
-   - Switch to production keys (different from test keys)
-   - Complete your Stripe account verification
-   - Create real products and pricing plans
-   - Set up webhook endpoints and secure them with proper signatures
-   - Implement proper payment error handling
+These are available check commands, not a claim that the current revision passes them. When reporting a result, include the revision, command, and relevant environment.
 
-4. **Environment Variables**:
-   - Set secure, unique keys for JWT_SECRET and JWT_REFRESH_SECRET
-   - Update NODE_ENV to "production"
-   - Set CLIENT_URL to your production frontend URL
-
-5. **Deployment Options**:
-   - Frontend: Netlify, Vercel, or any static hosting
-   - Backend: Render, Railway, Fly.io, or AWS/GCP/Azure
-   - Make sure to set all environment variables in your hosting platform
-
-6. **Additional Production Considerations**:
-   - Set up monitoring and logging (e.g., Sentry, LogRocket)
-   - Configure automatic backups for your database
-   - Set up SSL certificates for custom domains
-   - Implement a CI/CD pipeline for automated testing and deployment
-
-## 🔄 Using the Built-in Deployment Scripts
-
-ResumeArchitect includes deployment scripts for Netlify:
-
-1. **Staging Deployment**:
-   ```bash
-   npm run deploy:staging
-   ```
-
-2. **Production Deployment**:
-   ```bash
-   npm run deploy:production
-   ```
-
-These scripts will run tests and deploy to the appropriate environment.
-
-## ❓ Troubleshooting Common Issues
-
-- **API Connection Errors**: Check that your backend server is running on port 3001
-- **Database Connection Errors**: Verify your MongoDB connection string and network access settings
-- **Missing Environment Variables**: Ensure all required environment variables are set
-- **CORS Issues**: Make sure your CLIENT_URL matches the actual frontend URL
-
-If you encounter any issues, check the server logs and browser console for specific error messages.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+No license file is included in this checkout; this documentation refresh does not assign a license.
